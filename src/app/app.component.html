@@ -1,0 +1,9 @@
+<ng-container *ngIf="loading; else pageContent">
+    Loading...
+</ng-container>
+
+<ng-template #pageContent>
+    <ul>
+        <li *ngFor="let lesson of lessons$ | async">{{lesson.title}} | {{lesson.time}}</li>
+    </ul>
+</ng-template>
