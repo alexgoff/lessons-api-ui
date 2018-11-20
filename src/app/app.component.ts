@@ -27,25 +27,40 @@ export class AppComponent implements OnInit {
     let asyncResponse: any;
     let response: Lesson[];
 
+    // make the API call, JSON returns dates as a string so it will need to be manually cast into a Date object
     asyncResponse = await this._appService
       .getLessons()
       .then((data: Lesson[]) => {
-        response = data;
-        // this.dates = this.setDates(response);
+        response = data.map(lesson => {
+          lesson.time = new Date(lesson.time);
+          return lesson
+        });
       })
 
+    // sort the response so it's done for the lessons, and the new dates array later
+    response.sort((a, b) => a.time.getTime() - b.time.getTime());
+    
+    this.dates = this.setDates(response);
     this.lessons$.next(response);
 
     this.loading = false;
   }
 
-  setDates(lessons) {
-    let dates: Date[] = [];
 
-    // get only unique days from the set
+
+  setDates(lessons) {
+    // map our dates, as a datestring into a new array
+    let dates = lessons.map(lesson => lesson.time.toDateString());
+
+    // filter out all duplicate days
+    let uniqueDates = dates.filter((date, pos) => dates.indexOf(date) === pos);
+
+    // parse back into dates and sort
+    dates = uniqueDates.map(date => new Date(date));
+
+    dates.sort((a,b) => a.getTime() - b.getTime());
 
     return dates;
   }
-
 
 }

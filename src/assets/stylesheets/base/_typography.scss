@@ -1,0 +1,21 @@
+/**
+ * Basic typography style for copy text
+ */
+
+ body {
+    color: $text-color-medium-emph;
+ }
+
+ h1,h2,h3,h4,h5,h6 {
+     color: $text-color-high-emph;
+     display: block;
+     font-weight: bold;
+     margin-bottom: 1rem;
+     line-height: 1.2;
+ }
+
+ p {
+     display: block;
+     line-height: 1.5;
+     margin-bottom: 1rem;
+ }

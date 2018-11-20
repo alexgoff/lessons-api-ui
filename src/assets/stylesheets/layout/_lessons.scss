@@ -1,0 +1,125 @@
+.day {
+    margin-bottom: 1rem;
+    width: 100%;
+
+    &__header {
+        color: $text-color-medium-emph;
+        margin: 1rem 0;
+    }
+
+}
+
+.lessons {
+    &__lesson {
+        background: $white;
+        border: 1px solid $gray;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+    }
+}
+
+.lesson {
+    &__img {
+        margin-bottom: 1rem;
+    }
+
+    &__content {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+
+        h3 {
+            text-align: right;
+            margin-left: 1rem;
+        }
+    }
+
+    &__instructor {
+        align-items: center;
+        display: flex;
+        flex-direction: row-reverse;
+        margin-bottom: 1rem;
+
+        img {
+            margin-left: 1rem;
+        }
+    }
+}
+
+@media only screen and (min-width: $screen-md) {
+    .lessons {
+        &__lesson {
+            flex-direction: row;
+        }
+    }
+
+    .lesson {
+
+        &__content {
+            flex-basis: 75%;
+            margin-right: 1rem;
+        }
+
+        &__details {
+            flex-basis: 25%;
+        }
+
+        &__instructor {
+            flex-direction: row;
+
+            img {
+                margin-left: 0;
+                margin-right: 1rem;
+            }
+        }
+    }
+} 
+
+@media only screen and (min-width: $screen-lg) {
+    .day {
+        margin: 0 auto;
+        width: 75%;
+    }
+
+    .lessons {
+
+        &__lesson {
+            padding: 2rem;
+        }
+    }
+    .lesson {
+        &__content {
+            flex-basis: 60%;
+            margin-right: 0;
+
+            p {
+                margin-left: 4rem;
+            }
+        }
+
+        &__details {
+            display: flex;
+            flex-basis: 40%;
+            font-weight: bold;
+            justify-content: space-around;
+        }
+
+        &__header {
+            align-items: flex-start;
+
+            h3 {
+                margin-top: 0.5rem;
+            }
+        }
+
+        &__instructor {
+            align-items: start;
+        }
+    }
+} 

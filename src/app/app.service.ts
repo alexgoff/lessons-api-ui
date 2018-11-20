@@ -30,7 +30,6 @@ export class AppService {
       .get(REQUEST.url)
       .toPromise()
       .then((resp: T) => {
-        // console.log('GET Response: ' + JSON.stringify(resp));
         return resp;
       })
       .catch(() => {

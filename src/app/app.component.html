@@ -1,9 +1,51 @@
-<ng-container *ngIf="loading; else pageContent">
-    Loading...
-</ng-container>
+<main class="container">
+    <ng-container *ngIf="loading; else pageContent">
+        Loading...
+    </ng-container>
+</main>
+
 
 <ng-template #pageContent>
-    <ul>
-        <li *ngFor="let lesson of lessons$ | async">{{lesson.title}} | {{lesson.time}}</li>
-    </ul>
+    <header class="header">
+        <h1>Lessons Feed</h1>
+    </header>
+    <section class="day" *ngFor="let date of dates">
+        <h2 class="day__header" id="{{date | date:'yyyy-mm-dd'}}-lessons">
+            <time [attr.datetime]="date | date:'yyyy-mm-dd'">
+                {{date | date:'E, LLLL dd, yyyy'}}
+            </time>
+        </h2>
+
+        <ul class="day__lessons">
+            <ng-container *ngFor="let lesson of lessons$ | async">
+                <li class="lessons__lesson" *ngIf="lesson.time.toDateString() === date.toDateString()">
+                    <div class="lesson__content">
+                        <div class="lesson__header">
+                            <div class="lesson__img">
+                                <img src="{{lesson.subjectPhotoUrl}}" class="img--round img--icon" alt="Lesson subject icon">
+                            </div>
+                            <h3 class="lesson__header">{{lesson.title}}</h3>
+                        </div>
+                        <p>{{lesson.description}}</p>
+                    </div>
+                    <div class="lesson__details">
+                        <div class="lesson__instructor">
+                            <img src="{{lesson.instructorPhotoUrl}}" class="img--round img--icon" alt="Instructor {{lesson.instructorName}} photo">
+                            <div class="instructor__name">{{lesson.instructorName}}</div>
+                        </div>
+                        <div class="lesson__time">
+                            <time id="{{date | date:'yyyy-mm-dd'}}-{{lesson.time | date:'h:mm a'}}-lesson-start" [attr.datetime]="lesson.time | date:'medium'">
+                                {{lesson.time | date:'h:mm a'}}
+                            </time>
+                            -
+                            <time id="{{date | date:'yyyy-mm-dd'}}-{{lesson.time| date:'h:mm a'}}-lesson-end" [attr.datetime]="lesson.time.getTime() + (60*60*1000) | date:'medium'">
+                                {{lesson.time.getTime() + (60*60*1000)| date:'h:mm a'}}
+                            </time>
+                            {{lesson.time | date:'z'}}
+                        </div>
+                    </div>
+                </li>
+            </ng-container>
+        </ul>
+    </section>
 </ng-template>

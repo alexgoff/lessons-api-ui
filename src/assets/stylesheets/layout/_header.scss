@@ -1,0 +1,13 @@
+.header {
+    color: $text-color-high-emph;
+    font-size: 2rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+@media only screen and (min-width: $screen-lg) { 
+    .header {
+        margin: 1rem auto;
+        width: 75%;        
+    }
+}
